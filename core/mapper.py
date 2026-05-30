@@ -18,10 +18,12 @@ CONFIG_PATH = Path(__file__).parent.parent / "config" / "mapping.json"
 
 
 def load_aliases():
-    print("CONFIG_PATH =", CONFIG_PATH)
-    print("EXISTS =", CONFIG_PATH.exists())
+    if not CONFIG_PATH.exists():
+        raise FileNotFoundError(
+            f"mapping.json not found at {CONFIG_PATH}"
+        )
 
-    with open(CONFIG_PATH, "r") as f:
+    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
         config = json.load(f)
 
     return config["column_aliases"]
