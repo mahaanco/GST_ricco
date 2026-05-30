@@ -17,10 +17,13 @@ logger = logging.getLogger(__name__)
 CONFIG_PATH = Path(__file__).parent.parent / "config" / "mapping.json"
 
 
-def load_aliases() -> Dict[str, List[str]]:
-    """Load column aliases from config/mapping.json."""
+def load_aliases():
+    print("CONFIG_PATH =", CONFIG_PATH)
+    print("EXISTS =", CONFIG_PATH.exists())
+
     with open(CONFIG_PATH, "r") as f:
         config = json.load(f)
+
     return config["column_aliases"]
 
 
